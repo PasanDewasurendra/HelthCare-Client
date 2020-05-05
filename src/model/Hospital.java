@@ -161,7 +161,7 @@ public class Hospital {
 				String timef = rs.getString("time_from");
 				String timet = rs.getString("time_to");
 				
-				String row = "<tr><td><input id='hiddenSchedId' name='hiddenSchedId' type='hidden' value='"+id+"'>"+date+"</td>"
+				String row = "<tr><td><input id='hiddenSchedUpdId' name='hiddenSchedUpdId' type='hidden' value='"+id+"'>"+date+"</td>"
 						+ "<td>"+name+"</td><td>"+specs+"</td>"
 						+ "<td>"+loc+"</td>"
 						+ "<td>"+timef+"</td>"
