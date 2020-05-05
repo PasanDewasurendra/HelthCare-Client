@@ -32,6 +32,7 @@ $(document).on("click", "#btnSaveSchedule", function(event){
 	 var status = validateScheduleForm();
 
 	 if (status != true){
+		 	 
 		 $("#alertError").text(status);
 		 $("#alertError").show();
 		 return;
@@ -180,26 +181,45 @@ function onDeleteScheduleComplete(response, status){
 function validateScheduleForm(){
 	
 	if ($("#schdDoctor").val().trim() == ""){
-		return "*Doctor Name is Mandotary.";
+		$('#schdDoctor').addClass('is-invalid');
+		return "*Doctor Name is Mandatory.";
+	}else{
+		$('#schdDoctor').removeClass('is-invalid');
 	}
 	
 	if ($("#schdSpec").val().trim() == ""){
-		return "*Doctor Specialization is Mandotary.";
-	} 
+		$('#schdSpec').addClass('is-invalid');
+		return "*Doctor Specialization is Mandatory.";
+	}else{
+		$('#schdSpec').removeClass('is-invalid');
+	}
 	
 	if ($("#schdLoc").val().trim() == ""){
-		return "*Location is Mandotary.";
+		$('#schdLoc').addClass('is-invalid');
+		return "*Location is Mandatory.";
+	}else{
+		$('#schdLoc').removeClass('is-invalid');
 	}
 	
 	if ($("#schdDate").val().trim() == ""){
-		return "Schedule Date is Mandotary.";
+		$('#schdDate').addClass('is-invalid');
+		return "Schedule Date is Mandatory.";
+	}else{
+		$('#schdDate').removeClass('is-invalid');
 	}
+	
 	if ($("#schdTimeFrom").val().trim() == ""){
-		return "*Session Starting Time is Mandotary.";
+		$('#schdTimeFrom').addClass('is-invalid');
+		return "*Session Starting Time is Mandatory.";
+	}else{
+		$('#schdTimeFrom').removeClass('is-invalid');
 	}
 	
 	if ($("#schdTimeTo").val().trim() == ""){
-		return "*Session Ending Time is Mandotary.";
+		$('#schdTimeTo').addClass('is-invalid');
+		return "*Session Ending Time is Mandatory.";
+	}else{
+		$('#schdTimeTo').removeClass('is-invalid');
 	}
 	
 	return true;

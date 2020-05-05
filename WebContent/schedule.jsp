@@ -9,7 +9,7 @@
 
 <link rel="stylesheet" href="Views/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
-<script src="Components/hospital.js"></script>
+<script src="Components/schedule.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -20,16 +20,16 @@
   <a class="navbar-brand" href="#">Hospital Management</a>
   <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link" href="hospital.jsp">Schedule</a>
+      <a class="nav-link" href="schedule.jsp">Schedule</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Hospital</a>
+      <a class="nav-link" href="hospital.jsp">Hospital</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Doctor</a>
+      <a class="nav-link" href="doctor.jsp">Doctor</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#">Patient</a>
+      <a class="nav-link" href="patient.jsp">Patient</a>
     </li>
   </ul>
 </nav>
@@ -38,9 +38,12 @@
 
 	<h2 class="display-4 bg-light p-3">Schedule Management</h2>
 
-
 	<div class="row">
 		<div class="col">
+		
+			<div id="alertSuccess" class="atert alert-success alert-dismissible p-2 mb-2"></div>
+			<div id="alertError" class="atert alert-danger alert-dismissible p-2 mb-2"></div>
+			
 
 			<form class="form border border-primary p-2 rounded" action="schedule.jsp" name="formSchedule" method="post" id="formSchedule">
 				<div class="form-group">
@@ -78,13 +81,6 @@
 				<input type="hidden" id="hiddenSchdID" name="hiddenSchdID" value="">
 			
 			</form>
-			
-			<br>
-			
-			<div id="alertSuccess" class="atert alert-success alert-dismissible p-2"></div>
-			<div id="alertError" class="atert alert-danger alert-dismissible p-2"></div>
-			
-			<br>
 
 		</div>
 		
