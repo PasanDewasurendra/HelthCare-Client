@@ -6,7 +6,7 @@ $(document).ready(function(){
 
 
 // SAVE ============================================
-$(document).on("click", "#btnSave", function(event){
+$(document).on("click", "#btnSaveSchedule", function(event){
 	
 // Clear alerts---------------------
 	 $("#alertSuccess").text("");
@@ -15,7 +15,7 @@ $(document).on("click", "#btnSave", function(event){
 	 $("#alertError").hide();
 	 
 // Form validation-------------------
-	 var status = validateItemForm();
+	 var status = validateScheduleForm();
 
 	 if (status != true){
 		 $("#alertError").text(status);
@@ -24,17 +24,17 @@ $(document).on("click", "#btnSave", function(event){
 	 }
 	 
 // If valid------------------------
-	 var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
+	 var type = ($("#hiddenSchdID").val() == "") ? "POST" : "PUT";
 	 
 	 $.ajax({
 			
-		url : "ItemAPI",
+		url : "HospitalAPI",
 		type : type,
-		data : $("#formItem").serialize(),
+		data : $("#formSchedule").serialize(),
 		dataType : "text",
 		complete : function(response, status)
 		{
-			onItemSaveComplete(response.responseText,status);
+			onAddScheduleComplete(response.responseText,status);
 		}
 			
 	});
@@ -42,7 +42,7 @@ $(document).on("click", "#btnSave", function(event){
 });
 
 
-function onItemSaveComplete(response, status){
+function onAddScheduleComplete(response, status){
 	
 	if(status == "success"){
 		
@@ -50,10 +50,10 @@ function onItemSaveComplete(response, status){
 		
 		if(resultSet.status.trim() == "success"){
 			
-			$("#alertSuccess").text("Successfully Saved.");
+			$("#alertSuccess").text("New Schedule Successfully Added.");
 			$("#alertSuccess").show();
 			
-			$("#divItemsGrid").html(resultSet.data);
+			$("#tblSchedule").html(resultSet.data);
 			
 		}else if(resultSet.status.trim() == "error"){
 			
@@ -63,49 +63,51 @@ function onItemSaveComplete(response, status){
 		
 	}else if(status == "error"){
 		
-		$("#alertError").text("Error while Saving.");
+		$("#alertError").text("Something wrong with Adding new Schedule.");
 		$("#alertError").show();
 		
 	}else{
-		$("#alertError").text("Unknown error while saving.");
+		$("#alertError").text("Unknown error while Adding new Schedule.");
 		$("#alertError").show();
 	}
 	
-	$("#hidItemIDSave").val("");
-	$("#formItem")[0].reset();
+	$("#hiddenSchdID").val("");
+	$("#formSchedule")[0].reset();
 	
 }
 
 
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event){
-	 $("#hidItemIDSave").val($(this).closest("tr").find('#hidItemIDUpdate').val());
-	 $("#itemCode").val($(this).closest("tr").find('td:eq(0)').text());
-	 $("#itemName").val($(this).closest("tr").find('td:eq(1)').text());
-	 $("#itemPrice").val($(this).closest("tr").find('td:eq(2)').text());
-	 $("#itemDesc").val($(this).closest("tr").find('td:eq(3)').text());
+	 $("#hiddenSchdID").val($(this).closest("tr").find('#hiddenSchedUpdId').val());
+	 $("#schdDate").val($(this).closest("tr").find('td:eq(3)').text());
+	 $("#schdDoctor").val($(this).closest("tr").find('td:eq(0)').text());
+	 $("#schdSpec").val($(this).closest("tr").find('td:eq(1)').text());
+	 $("#schdLoc").val($(this).closest("tr").find('td:eq(2)').text());
+	 $("#schdTimeFrom").val($(this).closest("tr").find('td:eq(4)').text());
+	 $("#schdTimeTo").val($(this).closest("tr").find('td:eq(5)').text());
 });
 
 
-$(document).on("click", ".btnRemove", function(event){
+$(document).on("click", ".btnDelete", function(event){
 	
 	$.ajax(
 	{
-		url  : "ItemAPI",
+		url  : "HospitalAPI",
 		type : "DELETE",
-		data : "itemID=" + $(this).data("itemid"),
+		data : "scheduleID=" + $(this).data("id"),
 		dataType : "text",
 		complete : function(response, status)
 		{
 			console.log(status);
-			onItemDeleteComplete(response.responseText, status);
+			onDeleteScheduleComplete(response.responseText, status);
 		}
 		
 	});
 	
 });
 
-function onItemDeleteComplete(response, status){
+function onDeleteScheduleComplete(response, status){
 	
 	console.log(status);
 	
@@ -118,7 +120,7 @@ function onItemDeleteComplete(response, status){
 		
 		if(resultSet.status.trim() == "success"){
 			
-			$("#alertSuccess").text("Successfully Deleted.");
+			$("#alertSuccess").text("Schedule Successfully Deleted.");
 			$("#alertSuccess").show();
 			
 			$("#divItemsGrid").html(resultSet.data);
@@ -131,12 +133,12 @@ function onItemDeleteComplete(response, status){
 		
 	}else if(status == "error"){
 		
-		$("#alertError").text("Error while Deleting.");
+		$("#alertError").text("Error while Deleting this Schedule Data.");
 		$("#alertError").show();
 		
 	}else{
 		
-		$("#alertError").text("Unknown error while Deleting.");
+		$("#alertError").text("Something wrong with Deleting this Schedule Data.");
 		$("#alertError").show();
 	}
 	
@@ -144,36 +146,29 @@ function onItemDeleteComplete(response, status){
 
 
 // CLIENTMODEL=========================================================================
-function validateItemForm(){
+function validateScheduleForm(){
 	
-// CODE
-	if ($("#itemCode").val().trim() == ""){
-		return "Insert Item Code.";
+	if ($("#schdDoctor").val().trim() == ""){
+		return "*Doctor Name is Mandotary.";
 	}
 	
-// NAME
-	if ($("#itemName").val().trim() == ""){
-		return "Insert Item Name.";
+	if ($("#schdSpec").val().trim() == ""){
+		return "*Doctor Specialization is Mandotary.";
 	} 
-
-// PRICE-------------------------------
-	if ($("#itemPrice").val().trim() == ""){
-		return "Insert Item Price.";
+	
+	if ($("#schdLoc").val().trim() == ""){
+		return "*Location is Mandotary.";
 	}
 	
-// is numerical value
-	var tmpPrice = $("#itemPrice").val().trim();
-	
-	if (!$.isNumeric(tmpPrice)){
-		return "Insert a numerical value for Item Price.";
+	if ($("#schdDate").val().trim() == ""){
+		return "Schedule Date is Mandotary.";
+	}
+	if ($("#schdTimeFrom").val().trim() == ""){
+		return "*Session Starting Time is Mandotary.";
 	}
 	
-// convert to decimal price
-	$("#itemPrice").val(parseFloat(tmpPrice).toFixed(2));
-	
-// DESCRIPTION------------------------
-	if ($("#itemDesc").val().trim() == ""){
-		return "Insert Item Description.";
+	if ($("#schdTimeTo").val().trim() == ""){
+		return "*Session Ending Time is Mandotary.";
 	}
 	
 	return true;
