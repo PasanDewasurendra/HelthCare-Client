@@ -40,7 +40,7 @@
 				<input id="schdTimeTo" name="schdTimeTo" type="text" class="form-control form-control-sm">
 				<br>
 								
-				<input id="btnAddSchedule" name="btnAddSchedule" type="button" value="Add New Schedule" class="btn btn-primary">
+				<input id="btnSaveSchedule" name="btnSaveSchedule" type="button" value="Add New Schedule" class="btn btn-primary">
 				<input type="hidden" id="hiddenSchdID" name="hiddenSchdID" value="">
 			
 			</form>
