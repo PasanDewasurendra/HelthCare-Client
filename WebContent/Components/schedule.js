@@ -1,3 +1,5 @@
+
+//Initialize
 $(document).ready(function(){
 
 	$("#alertSuccess").hide();
@@ -5,7 +7,7 @@ $(document).ready(function(){
 	$("#btnClear").hide();
 });
 
-
+//CLEAR FORM DATA
 $(document).on("click", "#btnClear", function(event){
 	$("#hiddenSchdID").val("");
 	$("#formSchedule")[0].reset();
@@ -14,7 +16,7 @@ $(document).on("click", "#btnClear", function(event){
 	
 });
 
-// ADD UPDATE
+// ADD UPDATE request algorithm
 $(document).on("click", "#btnSaveSchedule", function(event){
 	
 	$("#btnSaveSchedule").val("Add New Schedule");
@@ -56,7 +58,7 @@ $(document).on("click", "#btnSaveSchedule", function(event){
 	
 });
 
-
+//ADD UPDATE response algorithm
 function onAddScheduleComplete(response, status, type){
 	
 	console.log(status);
@@ -112,7 +114,7 @@ $(document).on("click", ".btnUpdate", function(event){
 	 $("#btnClear").show();
 });
 
-
+//DELETE request algorithm
 $(document).on("click", ".btnDelete", function(event){
 	
 	$("#btnSaveSchedule").val("Add New Schedule");
@@ -136,7 +138,7 @@ $(document).on("click", ".btnDelete", function(event){
 	
 });
 
-//DELETE
+//DELETE response algorithm
 function onDeleteScheduleComplete(response, status){
 	
 	console.log(status);
@@ -173,8 +175,6 @@ function onDeleteScheduleComplete(response, status){
 	}
 	
 }
-
-
 
 
 //Validations
