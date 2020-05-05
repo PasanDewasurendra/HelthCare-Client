@@ -162,7 +162,8 @@ public class Hospital {
 				String timet = rs.getString("time_to");
 				
 				String row = "<tr><td><input id='hiddenSchedUpdId' name='hiddenSchedUpdId' type='hidden' value='"+id+"'>"+date+"</td>"
-						+ "<td>"+name+"</td><td>"+specs+"</td>"
+						+ "<td>"+name+"</td>"
+						+ "<td>"+specs+"</td>"
 						+ "<td>"+loc+"</td>"
 						+ "<td>"+timef+"</td>"
 						+ "<td>"+timet+"</td>";
