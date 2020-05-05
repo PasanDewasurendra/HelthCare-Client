@@ -53,11 +53,17 @@ public class HospitalAPI extends HttpServlet {
 
 		Map parse = getParseMap(request);
 		
+//		System.out.println("Time from:"+parse.get("schdTimeFrom").toString());
+//		System.out.println("Time from:"+parse.get("schdTimeTo").toString());
+//		System.out.println(parse.get("schdTimeFrom").toString().replaceAll("%3A", ":"));
+//		
+		System.out.println("Time from:"+parse.get("schdDoctor").toString());
+		
 		String result = scheduleObj.updateDoctorSchedule(
 				parse.get("hiddenSchdID").toString(), 
 				parse.get("schdDoctor").toString(), 
-				parse.get("schdTimeFrom").toString(), 
-				parse.get("schdTimeTo").toString(), 
+				parse.get("schdTimeFrom").toString().replaceAll("%3A", ":"), 
+				parse.get("schdTimeTo").toString().replaceAll("%3A", ":"), 
 				parse.get("schdDate").toString(), 
 				parse.get("schdSpec").toString(), 
 				parse.get("schdLoc").toString());
@@ -69,7 +75,6 @@ public class HospitalAPI extends HttpServlet {
 		
 	}
 
-
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		Map parse = getParseMap(request);
@@ -80,8 +85,8 @@ public class HospitalAPI extends HttpServlet {
 		
 		response.getWriter().write(result);
 		
-		
 	}
+	
 	
 	private static Map getParseMap(HttpServletRequest request) {
 		
@@ -89,10 +94,15 @@ public class HospitalAPI extends HttpServlet {
 		
 		try {
 			Scanner sc = new Scanner(request.getInputStream(), "UTF-8");
+			
+			System.out.println("sc: "+sc);
+			
 			String query = sc.hasNext() ? sc.useDelimiter("\\A").next() : "";
 			sc.close();
 			
 			String[] params = query.split("&");
+			
+			System.out.println("param: "+params);
 			
 			for(String param : params) {
 				

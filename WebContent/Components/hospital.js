@@ -46,6 +46,8 @@ $(document).on("click", "#btnSaveSchedule", function(event){
 
 function onAddScheduleComplete(response, status){
 	
+	console.log(status);
+	
 	if(status == "success"){
 		
 		var resultSet = JSON.parse(response);
@@ -82,10 +84,10 @@ function onAddScheduleComplete(response, status){
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event){
 	 $("#hiddenSchdID").val($(this).closest("tr").find('#hiddenSchedUpdId').val());
-	 $("#schdDate").val($(this).closest("tr").find('td:eq(3)').text());
-	 $("#schdDoctor").val($(this).closest("tr").find('td:eq(0)').text());
-	 $("#schdSpec").val($(this).closest("tr").find('td:eq(1)').text());
-	 $("#schdLoc").val($(this).closest("tr").find('td:eq(2)').text());
+	 $("#schdDate").val($(this).closest("tr").find('td:eq(0)').text());
+	 $("#schdDoctor").val($(this).closest("tr").find('td:eq(1)').text());
+	 $("#schdSpec").val($(this).closest("tr").find('td:eq(2)').text());
+	 $("#schdLoc").val($(this).closest("tr").find('td:eq(3)').text());
 	 $("#schdTimeFrom").val($(this).closest("tr").find('td:eq(4)').text());
 	 $("#schdTimeTo").val($(this).closest("tr").find('td:eq(5)').text());
 });
@@ -125,7 +127,7 @@ function onDeleteScheduleComplete(response, status){
 			$("#alertSuccess").text("Schedule Successfully Deleted.");
 			$("#alertSuccess").show();
 			
-			$("#divItemsGrid").html(resultSet.data);
+			$("#tblSchedule").html(resultSet.data);
 			
 		}else if(resultSet.status.trim() == "error"){
 			
