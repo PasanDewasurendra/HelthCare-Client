@@ -56,17 +56,17 @@ public class HospitalAPI extends HttpServlet {
 //		System.out.println("Time from:"+parse.get("schdTimeFrom").toString());
 //		System.out.println("Time from:"+parse.get("schdTimeTo").toString());
 //		System.out.println(parse.get("schdTimeFrom").toString().replaceAll("%3A", ":"));
-//		
-		System.out.println("Time from:"+parse.get("schdDoctor").toString());
+		
+//		System.out.println("doctor:"+parse.get("schdDoctor").toString().replace("+", " "));
 		
 		String result = scheduleObj.updateDoctorSchedule(
 				parse.get("hiddenSchdID").toString(), 
-				parse.get("schdDoctor").toString(), 
+				parse.get("schdDoctor").toString().replace("+", " "), 
 				parse.get("schdTimeFrom").toString().replaceAll("%3A", ":"), 
 				parse.get("schdTimeTo").toString().replaceAll("%3A", ":"), 
-				parse.get("schdDate").toString(), 
-				parse.get("schdSpec").toString(), 
-				parse.get("schdLoc").toString());
+				parse.get("schdDate").toString().replaceAll("/", "-"), 
+				parse.get("schdSpec").toString().replace("+", " "), 
+				parse.get("schdLoc").toString().replace("+", " "));
 		
 		System.out.println(result);
 		

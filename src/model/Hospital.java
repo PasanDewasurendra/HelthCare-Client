@@ -142,9 +142,8 @@ public class Hospital {
 	
 	public String getDoctorSchedule() {
 		
-		out = "<table border='1'><tr><th>Date</th><th>Doctor Name</th><th>Speciality</th><th>Location</th><th>Time From</th><th>Time To</th></tr>";
+		out = "<table class='table table-hover'><thead class='thead-dark'><tr><th>Date</th><th>Doctor</th><th>Speciality</th><th>Location</th><th>Time From</th><th>Time To</th><th colspan='2'>Action</th></tr></thead>";
 		
-	
 		try {
 			Connection con = db.connect();
 
@@ -161,14 +160,14 @@ public class Hospital {
 				String timef = rs.getString("time_from");
 				String timet = rs.getString("time_to");
 				
-				String row = "<tr><td><input id='hiddenSchedUpdId' name='hiddenSchedUpdId' type='hidden' value='"+id+"'>"+date+"</td>"
+				String row = "<tbody><tr><td><input id='hiddenSchedUpdId' name='hiddenSchedUpdId' type='hidden' value='"+id+"'>"+date+"</td>"
 						+ "<td>"+name+"</td>"
 						+ "<td>"+specs+"</td>"
 						+ "<td>"+loc+"</td>"
 						+ "<td>"+timef+"</td>"
 						+ "<td>"+timet+"</td>";
 				
-				row = row.concat("<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-success'></td>"
+				row = row.concat("<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td>"
 						+ "<td><input name='btnDetete' type='button' value='Delete' class='btnDelete btn btn-danger' data-id='"+id+"'></td></tr>");
 				
 				out = out.concat(row);
@@ -176,7 +175,7 @@ public class Hospital {
 			}
 			
 			con.close();
-			out = out.concat("</table>");
+			out = out.concat("</tbody></table>");
 
 		}catch (Exception e) {
 			// TODO: handle exception	
