@@ -8,6 +8,8 @@ $(document).ready(function(){
 // SAVE ============================================
 $(document).on("click", "#btnSaveSchedule", function(event){
 	
+	console.log("save btn clicked.");
+	
 // Clear alerts---------------------
 	 $("#alertSuccess").text("");
 	 $("#alertSuccess").hide();
