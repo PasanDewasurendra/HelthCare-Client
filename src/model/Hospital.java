@@ -153,6 +153,7 @@ public class Hospital {
 			ResultSet rs = st.executeQuery(query);
 			
 			while(rs.next()) {
+				String id = String.valueOf(rs.getInt("id"));
 				String date = rs.getString("date");
 				String name = rs.getString("doctor_name");
 				String loc = rs.getString("location");
@@ -160,17 +161,28 @@ public class Hospital {
 				String timef = rs.getString("time_from");
 				String timet = rs.getString("time_to");
 				
-				String row = "<tr><td>"+date+"</td><td>"+name+"</td><td>"+specs+"</td><td>"+loc+"</td><td>"+timef+"</td><td>"+timet+"</td></tr>";
+				String row = "<tr><td><input id='hiddenSchedId' name='hiddenSchedId' type='hidden' value='"+id+"'>"+date+"</td>"
+						+ "<td>"+name+"</td><td>"+specs+"</td>"
+						+ "<td>"+loc+"</td>"
+						+ "<td>"+timef+"</td>"
+						+ "<td>"+timet+"</td>";
+				
+				row = row.concat("<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-success'></td>"
+						+ "<td><input name='btnDetete' type='button' value='Delete' class='btnDelete btn btn-danger' data-id='"+id+"'></td></tr>");
+				
 				out = out.concat(row);
 
-			}	
+			}
+			
+			con.close();
 			out = out.concat("</table>");
 
-			
 		}catch (Exception e) {
 			// TODO: handle exception	
 			e.getStackTrace();
+			out = "Error while fetching Shedule Data. Error Code: "+e.getMessage();
 		}
+		
 		System.out.println(out);
 		
 		return out;	
@@ -226,11 +238,14 @@ public class Hospital {
 			ps.setString(6, location);
 			ps.execute();
 			con.close();
-			out = " New Shedule Inserted.";
+			
+			String updatedShedule = getDoctorSchedule();
+			out = "{\"status\":\"success\", \"data\": \""+updatedShedule+"\"}";
 				
 		}catch (Exception e) {
 			// TODO: handle exception	
 			e.getStackTrace();
+			out = "{\"status\":\"error\", \"data\": \"Error while Adding new Schedule. Error="+e.getMessage()+" \"}";
 		}
 		System.out.println(out);
 		return out;
@@ -253,11 +268,13 @@ public class Hospital {
 			ps.setInt(7, Integer.parseInt(id));
 			ps.executeUpdate();
 			con.close();
-			out = "Schedule Data Updated.";
+			
+			String updatedShedule = getDoctorSchedule();
+			out = "{\"status\":\"success\", \"data\": \""+updatedShedule+"\"}";
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-			out = "Error While Schedule Data Updating.";
+			out = "{\"status\":\"error\", \"data\": \"Error while Updating Schedule. Error="+e.getMessage()+" \"}";
 			e.printStackTrace();
 		}
 		
@@ -274,24 +291,24 @@ public class Hospital {
 			ps.setInt(1,Integer.parseInt(id));
 			ps.execute();
 			con.close();
-			out = "Schedule Data Deleted.";
+			
+			String updatedShedule = getDoctorSchedule();
+			out = "{\"status\":\"success\", \"data\": \""+updatedShedule+"\"}";
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-			out = "Error While Schedule Data Deleting.";
+			out = "{\"status\":\"error\", \"data\": \"Error while Deleting Schedule. Error="+e.getMessage()+" \"}";
 			e.printStackTrace();
 		}
 		
 		return out;
 		
 	}
-	
 	    
 //	public String confirmAppointment(String apData) {
 //		
 //		return "";
 //	}
-	
 	
 
 }
