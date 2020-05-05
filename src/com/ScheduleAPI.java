@@ -15,12 +15,12 @@ import model.Hospital;
 
 
 @WebServlet("/HospitalAPI")
-public class HospitalAPI extends HttpServlet {
+public class ScheduleAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	Hospital scheduleObj = new Hospital();
 
-    public HospitalAPI() {
+    public ScheduleAPI() {
         super();
         
     }

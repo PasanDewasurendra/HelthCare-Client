@@ -10,6 +10,7 @@ $(document).on("click", "#btnClear", function(event){
 	$("#hiddenSchdID").val("");
 	$("#formSchedule")[0].reset();
 	$("#btnSaveSchedule").val("Add New Schedule");
+	$("#btnClear").hide();
 	
 });
 
