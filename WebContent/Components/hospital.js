@@ -52,7 +52,6 @@ $(document).on("click", "#btnSaveHospital", function(event){
 function onUpdateHospitalComplete(response, status){
 	
 	console.log(status);
-	console.log(type);
 	
 	if(status == "success"){
 		

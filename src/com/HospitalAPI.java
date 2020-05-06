@@ -44,8 +44,8 @@ public class HospitalAPI extends HttpServlet {
 		
 		String result = hospitalobj.UpdateHospitalDetails(
 				parse.get("hiddenHspID").toString(), 
-				parse.get("hspName").toString(), 
-				parse.get("hspAddress").toString(), 
+				parse.get("hspName").toString().replace("+", " "), 
+				parse.get("hspAddress").toString().replace("+", " "), 
 				parse.get("hspPhone").toString());
 		
 		System.out.println(result);

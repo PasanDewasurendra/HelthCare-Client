@@ -14,7 +14,7 @@ public class Hospital {
 	
 	public String getHospitalDetails() {
 		
-		out = "<table class='table table-hover'><thead class='bg-dark text-white'><tr><th>Name</th><th>Address</th><th>Phone</th><th>Action</th></tr></thead>";
+		out = "<table class='table table-hover'><thead class='bg-secondary text-white'><tr><th>Name</th><th>Address</th><th>Phone</th><th>Action</th></tr></thead>";
 		
 		try {
 			Connection con = db.connect();
@@ -68,7 +68,7 @@ public class Hospital {
 			ps.executeUpdate();
 			con.close();
 			
-			String updatedHospital = getDoctorSchedule();
+			String updatedHospital = getHospitalDetails();
 			out = "{\"status\":\"success\", \"data\": \""+updatedHospital+"\"}";
 			
 		}catch (Exception e) {

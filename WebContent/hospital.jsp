@@ -63,10 +63,10 @@
 					<input id="hspPhone" name="hspPhone" type="text" class="form-control form-control-sm">
 				</div>
 				
-				<div class="form-group">
+<!-- 			<div class="form-group">
 					<label for="hspEmail">Email:</label>
 					<input id="hspEmail" name="hspEmail" type="text" class="form-control form-control-sm">
-				</div>
+				</div> -->
 				
 								
 				<input id="btnSaveHospital" name="btnSaveHospital" type="button" value="Save" class="btn btn-primary">
