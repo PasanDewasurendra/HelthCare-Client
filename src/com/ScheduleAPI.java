@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Hospital;
 
 
-@WebServlet("/HospitalAPI")
+@WebServlet("/ScheduleAPI")
 public class ScheduleAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

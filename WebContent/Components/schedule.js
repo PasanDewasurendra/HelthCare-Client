@@ -45,7 +45,7 @@ $(document).on("click", "#btnSaveSchedule", function(event){
 	 
 	 $.ajax({
 			
-		url : "HospitalAPI",
+		url : "ScheduleAPI",
 		type : type,
 		data : $("#formSchedule").serialize(),
 		dataType : "text",
@@ -122,7 +122,7 @@ $(document).on("click", ".btnDelete", function(event){
 	
 	$.ajax(
 	{
-		url  : "HospitalAPI",
+		url  : "ScheduleAPI",
 		type : "DELETE",
 		data : "scheduleID=" + $(this).data("id"),
 		dataType : "text",
