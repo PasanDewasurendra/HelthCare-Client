@@ -14,7 +14,7 @@ public class Hospital {
 	
 	public String getHospitalDetails() {
 		
-		out = "<table border='1'><tr><th>ID</th><th>Name</th><th>Address</th><th>Phone</th></tr>";
+		out = "<table class='table table-hover'><thead class='bg-dark text-white'><tr><th>Name</th><th>Address</th><th>Phone</th><th>Action</th></tr></thead>";
 		
 		try {
 			Connection con = db.connect();
@@ -29,14 +29,23 @@ public class Hospital {
 				String address = rs.getString("address");
 				String phone = rs.getString("phone");
 				
-				String row = "<tr><td>"+id+"</td><td>"+name+"</td><td>"+address+"</td><td>"+phone+"</td></tr>";
+				String row = "<tbody><tr>"
+						+ "<input type='hidden' id='hiddenHspID' name='hiddenHspID' value='"+id+"'>"
+						+ "<td>"+name+"</td>"
+						+ "<td>"+address+"</td>"
+						+ "<td>"+phone+"</td>";
+				
+				
+				row = row.concat("<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-dark'></td></tr>");
 				out = out.concat(row);
+				
 			}	
-			out = out.concat("</table>");
+			out = out.concat("</tbody></table>");
 
 			
 		}catch (Exception e) {
-			// TODO: handle exception	
+			// TODO: handle exception
+			out = "Error while fetching Hospital Data. Error Code: "+e.getMessage();
 			e.getStackTrace();
 		}
 		System.out.println(out);
@@ -59,11 +68,12 @@ public class Hospital {
 			ps.executeUpdate();
 			con.close();
 			
-			out = "Hospital Data Updated.";
+			String updatedHospital = getDoctorSchedule();
+			out = "{\"status\":\"success\", \"data\": \""+updatedHospital+"\"}";
 			
 		}catch (Exception e) {
 			// TODO: handle exception
-			out = "Error While Hospital Data Updating.";
+			out = "{\"status\":\"error\", \"data\": \"Error while Updating Schedule. Error="+e.getMessage()+" \"}";
 			e.printStackTrace();
 		}
 		
@@ -142,7 +152,7 @@ public class Hospital {
 	
 	public String getDoctorSchedule() {
 		
-		out = "<table class='table table-hover'><thead class='thead-dark'><tr><th>Date</th><th>Doctor</th><th>Speciality</th><th>Location</th><th>Time From</th><th>Time To</th><th colspan='2'>Action</th></tr></thead>";
+		out = "<table class='table table-hover'><thead class='bg-dark text-white'><tr><th>Date</th><th>Doctor</th><th>Speciality</th><th>Location</th><th>Time From</th><th>Time To</th><th colspan='2'>Action</th></tr></thead>";
 		
 		try {
 			Connection con = db.connect();
